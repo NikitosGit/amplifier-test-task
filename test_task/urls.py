@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from backend_api.views import *
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('materials/', MaterialView.as_view(), name='material'),
+    path('materials/<int:pk>', MaterialDetailView.as_view(), name='material_detail'),
 ]
