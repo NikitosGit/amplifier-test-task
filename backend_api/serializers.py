@@ -14,26 +14,6 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class FlatMaterialSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    title = serializers.CharField()
-    code = serializers.IntegerField()
-    cost = serializers.DecimalField(max_digits=10, decimal_places=2)
-    category_title = serializers.CharField(source='category.title')
-
-    def to_representation(self, instance):
-        return {
-            'id': instance.id,
-            'title': instance.title,
-            'code': instance.code,
-            'cost': instance.cost,
-            'category_title': instance.category.title
-        }
-
-
-
-
-
 class CategoryWithMaterialSerializer(serializers.ModelSerializer):
     materials = MaterialSerializer(many=True, read_only=True, required=False)
 
