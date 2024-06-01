@@ -28,8 +28,5 @@ class Category(MPTTModel):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
-    def get_absolute_url(self):
-        return reverse('material-by-category', args=[int(self.id)])
-
     def __str__(self):
         return self.title
