@@ -23,4 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('materials/', MaterialView.as_view(), name='material'),
     path('materials/<int:pk>', MaterialDetailView.as_view(), name='material_detail'),
+    path('categories/', CategoryView.as_view(), name='category'),
+    path('categories-full-flat/', CategoryWithMaterialsFlatView.as_view(), name='category_full_flat'),
+    path('categories-full/', CategoryWithMaterialsView.as_view(), name='category_full')
 ]
