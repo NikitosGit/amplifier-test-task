@@ -23,8 +23,13 @@ class CategoryView(ListCreateAPIView):
 
 
 class CategoryWithMaterialsView(ListAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategoryWithMaterialSerializer
+    def get(self, request, *args, **kwargs):
+        root_category = Category.objects.filter(parent=None).first()
+        if not root_category:
+            return Response({"detail": "Root category not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = CategoryWithMaterialSerializer(root_category)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class CategoryWithMaterialsFlatView(APIView):

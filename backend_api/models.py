@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -30,3 +31,6 @@ class Category(MPTTModel):
 
     def __str__(self):
         return self.title
+
+    def get_total_cost(self):
+        return self.materials.aggregate(Sum('cost'))['material_cost']
